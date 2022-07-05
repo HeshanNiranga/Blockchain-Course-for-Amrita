@@ -9,7 +9,7 @@ print(web3.eth.defaultAccount)
 
 #Application Binary Interface
 
-compiled_contract_path = 'build/contracts/FLIRContract.json'
+compiled_contract_path = 'build/contracts/hello.json'
 
 # Deployed contract address (see `migrate` command output: `contract address`)
 deployed_contract_address = '0x645e911F16D22f8423fD79a4d565c32F139A8F28'
@@ -21,8 +21,11 @@ with open(compiled_contract_path) as file:
 # Fetch deployed contract reference
 contract = web3.eth.contract(address=deployed_contract_address, abi=contract_abi)
 
-a = contract.functions.setPayload("hello").call()
+a = contract.functions.input(1,2,3).transact()
 print(a)
 
-b = contract.functions.sayHello().call()
+b = contract.functions.sum1.call()
 print(b)
+
+c = contract.functions.sub1.call()
+print(c)
